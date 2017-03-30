@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<label for="task">
+			Tasks:
+			<input type="text" name="task">
+		</label>
+	
+	<form action="{% url 'appointment:edit' %}" method="POST">
+		{% csrf_token %}
+	<label for="status">
+		<select name="status">
+			<option value="done">Done</option>
+			<option value="pending">Pending</option>
+			<option value="missed">Missed</option>
+		</select>
+	</label>
+
+	<label for ="date">
+				Date:
+				<input type="date" name="date">
+	</label>
+
+	<label for ="time">
+				Time:
+				<input type="time" name="time">
+	</label>
+
+	<input type="submit" name="Update">
+	</form>
+
+	<a href="{% url 'appointment:index' %}">Dashboard</a>
+
+
+	<form action="{% url 'login:logout' %}" method="post">
+  	{% csrf_token %}
+    <input type="submit" name - "submit" value="Logout" />
+	</form>
+
+
+
+</body>
+</html>
+
+
+
+
+

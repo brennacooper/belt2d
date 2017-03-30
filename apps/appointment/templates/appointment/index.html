@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<h1>Welcome, {{request.session.user_first_name}} </h1>
+
+	<p>Here are your appointments for today, {{date}}:
+
+	<table>
+		<tr>
+			<th>Tasks</th>
+			<th>Time</th>
+			<th>Status</th>
+			<th>Action</th>
+		</tr>
+		{% for appointment in appointments %}
+		<tr>
+			<td>{{appointment.task}}</td>
+			<td>{{appointment.time}}</td>
+			<td><form action="{% url 'appointment:edit' id=appointment.id %}">{% csrf_token %}<input type="submit" value="Edit"></form></td>
+			<form action="{% url 'courses:delete' id=course.id %}" method="post">
+	  		{% csrf_token %}
+	    	<input type="submit" value="Delete"  />
+			</form>
+        </tr>
+		{% endfor %}
+            
+        </table>
+
+        <p>Your Other Appointments:
+
+	<table>
+		<tr>
+			<th>Tasks</th>
+			<th>Date</th>
+			<th>Time</th>
+		</tr>
+		{% for appointment in appointments %}
+		<tr>
+			<td>{{appointment.task}}</td>
+			<td>{{appointment.date}}</td>
+			<td>{{appointment.time}}</td>
+        </tr>
+		{% endfor %}
+            
+        </table>
+
+        <p>Add Appointment</p>
+		<form action="{% url 'appointment:create' %}" method="POST">
+		{% csrf_token %}
+		<label for ="date">
+				Date:
+				<input type="date" name="date">
+		</label>
+
+		<label for ="time">
+				Time:
+				<input type="time" name="time">
+		</label>
+		
+		<label for="task">
+			Tasks:
+			<input type="text" name="task">
+		</label>
+
+		
+		<input type="submit" name="Add">
+	</form>
+		
+
+
+	<form action="{% url 'login:logout' %}" method="post">
+  	{% csrf_token %}
+    <input type="submit" name - "submit" value="Logout" />
+	</form>
+
+
+
+</body>
+</html>
